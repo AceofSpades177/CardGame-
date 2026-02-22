@@ -1,9 +1,14 @@
+import java.util.ArrayList;
 public class Game{
 	public static void main(String[] args){
 		Card[] mainDeck = new Card[112];
-		mainDeck = fill(mainDeck);
-		mainDeck = shuffle(mainDeck);
-
+		mainDeck=fill(mainDeck);
+		mainDeck=shuffle(mainDeck);
+		ArrayList<Card> Player1 = new ArrayList<>();
+		ArrayList<Card> Player2 = new ArrayList<>();
+		ArrayList<Card> Player3 = new ArrayList<>();
+		ArrayList<Card> Player4 = new ArrayList<>();
+		distrubute(mainDeck, Player1, Player2, Player3, Player4);
 		}
 		public static Card[] fill(Card[] mainDeck){
 			String tempColor = "";
@@ -50,24 +55,30 @@ public class Game{
 		}
 		public static Card[] shuffle(Card[] mainDeck)
 		{
-			boolean empty = false;
-			int count=0;
-			Card[] shuffled = new Card[108];
-			while(empty==false){
-				for(int x=0;x<108;x++){
-				int rand = (int)(Math.random()*108)+1;
-				if(mainDeck[rand]!=null){
-					shuffled[x]=mainDeck[rand];
-					mainDeck[rand]=null;
-				}
-				}
-				for(int x=0;x<=107;x++){
-					if(mainDeck[x]==null)
-						count++;
-				}
-				if(count==108)
-					empty=true;
-				}
-		return shuffled;
+			Card temp;
+			for(int x=0;x<112;x++){
+			int rand = (int)(Math.random()*112);
+			temp = mainDeck[x];
+			mainDeck[x]=mainDeck[rand];
+			mainDeck[rand]=temp;
+			}
+			return mainDeck;
+		}
+		public static void distrubute(Card[] mainDeck, ArrayList<Card> Player1, ArrayList<Card> Player2, ArrayList<Card> Player3, ArrayList<Card> Player4){
+			int count = 0;
+			for(int x=0;x<7;x++){
+			Player1.add(mainDeck[count]);
+			count++;
+			Player2.add(mainDeck[count]);
+			count++;
+			Player3.add(mainDeck[count]);
+			count++;
+			Player4.add(mainDeck[count]);
+			count++;
+			}
+			System.out.println(Player1);
+			System.out.println(Player2);
+			System.out.println(Player3);
+			System.out.println(Player4);
 		}
 }
